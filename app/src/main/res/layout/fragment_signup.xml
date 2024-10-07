@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SignupFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e0ba"
+    tools:context=".SignupFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textViewRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Register"
+            android:textAlignment="center"
+            android:textColor="#2C5E29"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/input_bg"
+            android:hint="Name"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
+
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/input_bg"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputName" />
+
+
+        <EditText
+            android:id="@+id/inputPassword"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/input_bg"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+
+
+        <EditText
+            android:id="@+id/inputConfirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/input_bg"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_bg"
+            android:backgroundTint="@null"
+            android:text="Register"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
+
+
+        <TextView
+            android:id="@+id/signInText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="signInText"
+            android:padding="8dp"
+            android:text="Already have an account? Sign In"
+            android:textAlignment="center"
+            android:textColor="#2C5E29"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+        <Button
+            android:id="@+id/btnswitch"
+            android:layout_width="93dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="24dp"
+            android:text="Sign In"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="@+id/signInText"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

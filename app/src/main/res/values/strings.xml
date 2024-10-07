@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">BirdWatchApp_P2</string>
+    <string name="title_home">Home</string>
+    <string name="title_welcome">Welcome</string>
+
+    <string name="title_login">Login</string>
+    <string name="title_signup">Sign Up</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_captures">Captures</string>
+    <string name="title_settings">Settings</string>
+
+    <string name="todo">TODO</string>
+    <string name="welcome_to_messenger">BirdQuest</string>
+    <string name="Compassword">Confirm Password</string>
+    <string name="fullName">Full Name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="lastName">Surname</string>
+    <string name="or">Dont have an account? HERE</string>
+    <string name="sign_in">Sign in</string>
+    <string name="stay_in_touch">Welcome to BirdQuest, your Bird Watching app.</string>
+    <string name="log_in">LOGIN</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="name_required_error">Name is required to sign up.</string>
+    <string name="phone_required_error">Surname is required to sign up.</string>
+    <string name="email_required_error">Email address is required to sign up.</string>
+    <string name="password_required_error">Password is required to sign up.</string>
+    <string name="malformed_phone_error">This phone number is badly formatted.</string>
+    <string name="malformed_email_error">This email address is badly formatted.</string>
+    <string name="short_password_error">Password should be at least 6 characters.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t Have An Account? Sign Up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="username">Username</string>
+    <string name="settings">Settings</string>
+    <string name="distance_unit">Distance Unit</string>
+    <string name="maximum_distance_km_miles">Maximum Distance (km/miles)</string>
+    <string name="enter_maximum_distance">Enter maximum distance</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="date_time"><![CDATA[Date & Time]]></string>
+    <string name="bird_name">Bird Name</string>
+    <string name="location">Location</string>
+
+</resources>

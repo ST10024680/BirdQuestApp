@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1050578272052",
+    "project_id": "birdwatchapp-p2",
+    "storage_bucket": "birdwatchapp-p2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050578272052:android:277c4e8ac7c0227fdcef61",
+        "android_client_info": {
+          "package_name": "com.example.birdwatchapp_p2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf6lvI09q_xvv_PTDAoOuCheN2QqEFlPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
