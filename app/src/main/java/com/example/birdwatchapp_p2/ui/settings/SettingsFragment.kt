@@ -49,7 +49,8 @@ class SettingsFragment : Fragment() {
             editor.putString("maxDistance", inputMaxDistance.text.toString())
             editor.apply()
 
-            findNavController().popBackStack() // Go back after saving
+            findNavController().navigate(R.id.navigation_home)
+// Go back after saving
         }
 
     }
