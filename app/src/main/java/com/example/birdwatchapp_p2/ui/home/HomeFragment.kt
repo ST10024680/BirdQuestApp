@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -57,15 +58,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-        getCurrentLocationAndShowOnMap()
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.isMyLocationEnabled = true // Enable the blue dot on the map
+        }
+
+        getCurrentLocationAndShowOnMap() // Continue to display the custom marker
     }
+
 
     private fun requestLocationPermission() {
         val permission = Manifest.permission.ACCESS_FINE_LOCATION
         when {
             ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
-                // Permission already granted
                 getCurrentLocationAndShowOnMap()
+            }
+            shouldShowRequestPermissionRationale(permission) -> {
+                // Show an explanation to the user as to why the permission is needed, then request it
             }
             else -> {
                 // Request permission
@@ -73,6 +82,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+
+
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -87,50 +98,55 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 if (location != null) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     googleMap.addMarker(MarkerOptions().position(currentLatLng).title("You are here"))
-
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f)) // Move camera to current location
 
                     // Fetch and display birding hotspots
                     fetchBirdingHotspots(location.latitude, location.longitude)
                 } else {
                     // Handle the case when the location is null
+                    Toast.makeText(requireContext(), "Unable to fetch current location", Toast.LENGTH_SHORT).show()
                 }
             }.addOnFailureListener { exception ->
                 // Handle failure to get last location
+                Toast.makeText(requireContext(), "Failed to get location", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+
     private fun fetchBirdingHotspots(lat: Double, lng: Double) {
-        // Load preferences
-        val sharedPreferences = requireActivity().getSharedPreferences("BirdWatchAppPrefs", 0)
-        val unitSystem = sharedPreferences.getBoolean("unitSystem", true) // true for kilometers, false for miles
-        val maxDistance = sharedPreferences.getString("maxDistance", "50")?.toDouble() ?: 50.0
+        val sharedPreferences = context?.getSharedPreferences("BirdWatchAppPrefs", 0)
+        if (sharedPreferences != null) {
+            val unitSystem = sharedPreferences.getBoolean("unitSystem", true) // true for kilometers, false for miles
+            val maxDistance = sharedPreferences.getString("maxDistance", "50")?.toDouble() ?: 50.0
 
-        // Fetch hotspots and filter by maxDistance
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.ebird.org/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            // Proceed with the API call and filtering logic
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://api.ebird.org/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-        val birdApiService = retrofit.create(BirdApiService::class.java)
-        birdApiService.getHotspots("011", "json", "rppfimmi69sq").enqueue(object : Callback<List<Hotspot>> {
-            override fun onResponse(call: Call<List<Hotspot>>, response: Response<List<Hotspot>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { hotspots ->
-                        val filteredHotspots = hotspots.filter { hotspot ->
-                            val distance = calculateDistance(lat, lng, hotspot.latitude, hotspot.longitude, unitSystem)
-                            distance <= maxDistance
+            val birdApiService = retrofit.create(BirdApiService::class.java)
+            birdApiService.getHotspots("011", "json", "rppfimmi69sq").enqueue(object : Callback<List<Hotspot>> {
+                override fun onResponse(call: Call<List<Hotspot>>, response: Response<List<Hotspot>>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { hotspots ->
+                            val filteredHotspots = hotspots.filter { hotspot ->
+                                val distance = calculateDistance(lat, lng, hotspot.latitude, hotspot.longitude, unitSystem)
+                                distance <= maxDistance
+                            }
+                            displayHotspotsOnMap(filteredHotspots)
                         }
-                        displayHotspotsOnMap(filteredHotspots)
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<List<Hotspot>>, t: Throwable) {
-                // Handle error
-            }
-        })
+                override fun onFailure(call: Call<List<Hotspot>>, t: Throwable) {
+                    // Handle error
+                }
+            })
+        }
     }
+
 
     // Helper function to calculate the distance between two coordinates
     private fun calculateDistance(
